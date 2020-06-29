@@ -14,7 +14,7 @@ mkswap /mnt/swapfile
 chmod 600 /mnt/swapfile
 swapon /mnt/swapfile
 
-echo "Server = http://mirror.arizona.edu/archlinux/$repo/os/$arch" > /etc/pacman.d/mirrorlist
+echo 'Server = http://mirror.arizona.edu/archlinux/$repo/os/$arch' > /mnt/etc/pacman.d/mirrorlist
 pacstrap /mnt base linux linux-firmware intel-ucode grub efibootmgr
 
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -34,9 +34,9 @@ cat > /mnt/etc/hosts <<EOF
 127.0.1.1	tpad.localdomain	tpad
 EOF
 
-
-grub-install --target=x86_64-efi --efi-directory=/gruboot --bootloader-id=GRUB
-grub-mkconfig -o /gruboot/boot
+arch-chroot mount /dev/sda1 /mnt
+arch-chroot grub-install --target=x86_64-efi --efi-directory=/mnt --bootloader-id=GRUB
+arch-chroot grub-mkconfig -o /mnt/boot
 
 
 echo "now set the root password"
