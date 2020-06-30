@@ -6,16 +6,15 @@ mkfs.ext4 /dev/sda2
 mkfs.fat -F32 /dev/sda1
 mount /dev/sda2 /mnt
 
-mkdir /gruboot
-mount /dev/sda1 /gruboot
-
 dd if=/dev/zero of=/mnt/swapfile bs=1G count=1
 mkswap /mnt/swapfile
 chmod 600 /mnt/swapfile
 swapon /mnt/swapfile
 
 echo 'Server = http://mirror.arizona.edu/archlinux/$repo/os/$arch' > /mnt/etc/pacman.d/mirrorlist
-pacstrap /mnt base linux linux-firmware intel-ucode grub efibootmgr
+echo 'Server = http://mirror.arizona.edu/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
+pacman -Sy
+pacstrap /mnt base linux linux-firmware intel-ucode grub efibootmgr e2fsprogs mount util-linux
 
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/America/Phoenix /etc/localtime
