@@ -14,7 +14,7 @@ swapon /mnt/swapfile
 echo 'Server = http://mirror.arizona.edu/archlinux/$repo/os/$arch' > /mnt/etc/pacman.d/mirrorlist
 echo 'Server = http://mirror.arizona.edu/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 pacman -Sy
-pacstrap /mnt base linux linux-firmware intel-ucode grub efibootmgr e2fsprogs mount util-linux
+pacstrap /mnt base linux linux-firmware intel-ucode grub efibootmgr e2fsprogs util-linux
 
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/America/Phoenix /etc/localtime
