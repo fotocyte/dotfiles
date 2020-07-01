@@ -17,7 +17,7 @@ echo 'Server = http://mirror.arizona.edu/archlinux/$repo/os/$arch' > /etc/pacman
 wpa_supplicant -B -i wlan0 -c<(wpa_passphrase WIRELESSNET PASSWORD)
 
 pacman -Sy
-pacstrap /mnt base linux linux-firmware intel-ucode grub efibootmgr e2fsprogs util-linux
+pacstrap /mnt base linux linux-firmware intel-ucode grub efibootmgr util-linux networkmanager networkmanager-openvpn
 
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/America/Phoenix /etc/localtime
@@ -42,3 +42,5 @@ arch-chroot /mnt grub-mkconfig -o /mnt/boot
 
 
 echo "now set the root password"
+reboot
+nmcli device wifi connect WIRELESSNET password PASSWORD
