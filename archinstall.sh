@@ -11,8 +11,11 @@ mkswap /mnt/swapfile
 chmod 600 /mnt/swapfile
 swapon /mnt/swapfile
 
-echo 'Server = http://mirror.arizona.edu/archlinux/$repo/os/$arch' > /mnt/etc/pacman.d/mirrorlist
+
 echo 'Server = http://mirror.arizona.edu/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
+
+wpa_supplicant -B -i wlan0 -c<(wpa_passphrase WIRELESSNET PASSWORD)
+
 pacman -Sy
 pacstrap /mnt base linux linux-firmware intel-ucode grub efibootmgr e2fsprogs util-linux
 
