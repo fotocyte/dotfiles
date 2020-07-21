@@ -36,9 +36,10 @@ cat > /mnt/etc/hosts <<EOF
 127.0.1.1	tpad.localdomain	tpad
 EOF
 
-arch-chroot /mnt mount /dev/sda1 /mnt
-arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/mnt --bootloader-id=GRUB
-arch-chroot /mnt grub-mkconfig -o /mnt/boot
+arch-chroot /mnt
+mount /dev/sda1 /mnt
+grub-install --target=x86_64-efi --efi-directory=/mnt --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
 
 
 echo "now set the root password"
